@@ -12,14 +12,22 @@ class Character{
 	int attackPower;
 	int defensePower;
 	int speed;
+	int actionGauge;
+	boolean isEnemy; //적인지 아군인지 구별(true 이면 적군, false 이면 아군)
+	boolean isAlive; //살아있는지 죽은지 구별(true 이면 살아있고, false 이면 죽음)
 	public Character() {}
-	public Character(String roleSet, int hp, int attackPower, int defensePower, int speed) {
+	public Character(String roleSet, int hp, int attackPower, int defensePower, int speed, boolean isEnemy) {
 		this.roleSet = roleSet;
 		this.hp = hp;
 		this.attackPower = attackPower;
 		this.defensePower = defensePower;
 		this.speed = speed;
+		this.isEnemy = isEnemy;
 	}
+	 public void act() {  //행동
+	        System.out.println(roleSet + "의 턴 (속도: " + speed + ")");  //행동순서 출력
+	        actionGauge = 0; 
+	    }
 }
 
 class Skill extends Character{  //스킬 클래스
@@ -125,13 +133,14 @@ class damageSystem{
 	}
 }
 
+
 public class test {                        //메인
 	public static void main(String[] args) {
 		System.out.println("스킬 시스템");
-		Character attacker = new Character("attacker", 2000, 700, 100, 50);
-		Character tanker = new Character("tanker", 3000, 300, 200, 30);
-		Character healer = new Character("healer", 1500, 150, 50, 34);
-		Character supporter = new Character("supporter", 2400, 250, 150, 34);
+		Character attacker = new Character("attacker", 2000, 700, 100, 50, false);
+		Character tanker = new Character("tanker", 3000, 300, 200, 30, false);
+		Character healer = new Character("healer", 1500, 150, 50, 34, false);
+		Character supporter = new Character("supporter", 2400, 250, 150, 34, false);
 		System.out.println("attack의 체력 " + attacker.hp);
 		System.out.println("tanker의 공격력 " + tanker.attackPower);
 		System.out.println("healer의 방어력 " + healer.defensePower);
@@ -140,4 +149,3 @@ public class test {                        //메인
 		System.out.println("남은 체력: " + supporter.hp);
 	}
 }
-
